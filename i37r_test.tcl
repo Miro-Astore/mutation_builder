@@ -89,26 +89,36 @@ writepdb build_files/mutated_system.pdb
 #$sel writepsf 
 ## do ionization as normal  ## NB this method will assume that the termini added by gromacs will be overall neutral make sure when you add an extra charge if the termini is going to be 
 package require autoionize
-autoionize -psf build_files/mutated_system.psf -pdb build_files/mutated_system.pdb -neutralise -cation POT -anion CLA -o build_files/ionized
+autoionize -psf build_files/mutated_system.psf -pdb build_files/mutated_system.pdb -neutralize -cation POT -anion CLA -o build_files/ionized
 #
 
 #now we have to re order everything so gromacs doesn't complain that our index groups aren't contiguous
 mol delete all
 mol new build_files/ionized.psf 
 mol addfile build_files/ionized.pdb
-set sel [atomselect top "ions"]
-set names [$sel get name]
-set names [ lsort -unique $names ]
-foreach name $names {
-
-	set ionsel [atomselect top "ion and name $name"] 
-	$ionsel writepsf build_files/ions/$name.psf
-	$ionsel writepdb build_files/ions/$name.pdb
-}
+set sel [atomselect top "ion"]
+#set names [$sel get name]
+#set names [ lsort -unique $names ]
+#foreach name $names {
+#
+#	set ionsel [atomselect top "ion and name $name"] 
+#	$ionsel writepsf build_files/ions/$name.psf
+#	$ionsel writepdb build_files/ions/$name.pdb
+#}
+$sel writepsf build_files/ions.psf
+$sel writepdb build_files/ions.pdb
 mol delete all 
 
 set sel [atomselect top "not ion"]
 $sel writepsf build_files/not_ions.psf
 $sel writepdb build_files/not_ions.pdb
 resetpsf 
+ 
+#re merging ions and non ions
+readpsf build_files/not_ions.psf
+readpsf build_files/ions.psf
+coordpdb build_files/not_ions.pdb
+coordpdb build_files/ions.pdb
+writepsf ../ionized_i37r.psf
+writepdb ../ionized_i37r.pdb
 exit
