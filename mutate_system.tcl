@@ -3,7 +3,7 @@
 
 #make directory for temporary files if it doesn't exist
 
-file mkdir building_files
+file mkdir build_files
 
 #mol new ../final_wt_ionized_added_loops_no_ters_cter_modelled_use_this_gmx_ready.psf
 #mol addfile ../final_wt_ionized_added_loops_no_ters_cter_modelled_use_this_gmx_ready.pdb
@@ -90,7 +90,7 @@ writepdb build_files/mutated_system.pdb
 ## do ionization as normal 
 #
 
-mol delte all
+mol delete all
 mol new build_files/ionized.psf 
 mol addfile build_files/ionized.pdb
 set sel [atomselect top "ions"]
