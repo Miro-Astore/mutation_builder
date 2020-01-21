@@ -29,7 +29,7 @@ mol new build_files/mutated_prot.psf
 mol addfile build_files/mutated_prot.pdb
 set sel [atomselect top "name CA and protein"]
 set segnames [lsort -unique [$sel get segname]]
-foreach i segnames { 
+foreach i $segnames { 
 	set sel [atomselect top "segname $i"]
 	$sel writepsf build_files/$i.psf 
 	$sel writepdb build_files/$i.pdb 
@@ -40,10 +40,10 @@ package require psfgen
 resetpsf 
 
 # I don't have a license to distribute the topology so you will need to provide it 
-topology PROTEINTOP
+topology /home/miro/Downloads/toppar/top_all36_prot.rtf
 pdbalias atom ILE CD1 CD 
 
-readpsf build_files/AP1.psf
+#readpsf build_files/AP1.psf
 coordpdb build_files/AP1.pdb
 segment AP1 { 
 	pdb build_files/AP1.pdb
@@ -53,7 +53,7 @@ segment AP1 {
 coordpdb build_files/AP1.pdb AP1
 
 
-readpsf build_files/BP1.psf
+#readpsf build_files/BP1.psf
 coordpdb build_files/BP1.pdb
 segment BP1 { 
 	pdb build_files/BP1.pdb
@@ -107,7 +107,6 @@ set sel [atomselect top "ion"]
 #}
 $sel writepsf build_files/ions.psf
 $sel writepdb build_files/ions.pdb
-mol delete all 
 
 set sel [atomselect top "not ion"]
 $sel writepsf build_files/not_ions.psf
