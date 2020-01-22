@@ -23,7 +23,7 @@ $sel writepdb build_files/not_prot.pdb
 mol delete all 
 
 package require mutator 
-mutator -psf build_files/prot.psf -pdb build_files/prot.pdb -o build_files/mutated_prot -ressegname segname -resid RESID -mut MUT
+mutator -psf build_files/prot.psf -pdb build_files/prot.pdb -o build_files/mutated_prot -ressegname SEGNAME -resid RESID -mut MUT
 
 #mol delete all
 mol new build_files/mutated_prot.psf

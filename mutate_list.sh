@@ -9,6 +9,8 @@ template_pdb="../final_wt_ionized_added_loops_no_ters_cter_modelled_use_this_gmx
 template_psf="../final_wt_ionized_added_loops_no_ters_cter_modelled_use_this_gmx_ready.psf"
 topfile="/home/miro/Downloads/toppar/top_all36_prot.rtf"
 
+rm -r build_files 
+
 tempvmdc=$VMDNOCUDA 
 tempvmdo=$VMDNOOPTIX 
 export VMDNOCUDA=1 
@@ -30,6 +32,7 @@ do
 	cd ../mutated_systems/$sysname/
 	# now do gromacs things
 	echo -e "0\n2\n1\n0" | gmx pdb2gmx -f $sysname.pdb -p topol.top -ff charmm36-mar2019 -ter -water tip3p -o $sysname.gro
+	gmx editconf -f $sysname.gro -o ionized.gro -c yes 
 
 	cd $cwd
 done
