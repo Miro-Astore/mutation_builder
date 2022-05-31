@@ -46,22 +46,18 @@ pdbalias atom ILE CD1 CD
 
 #readpsf build_files/AP1.psf
 #coordpdb build_files/AP1.pdb
-segment AP1 { 
-	pdb build_files/AP1.pdb
+foreach i $segnames { 
+segment $i { 
+	pdb build_files/$i.pdb
 	first NONE
 	last NONE
 }  
-coordpdb build_files/AP1.pdb AP1
+coordpdb build_files/$i.pdb $i
+}
 
 
 #readpsf build_files/BP1.psf
 #coordpdb build_files/BP1.pdb
-segment BP1 { 
-	pdb build_files/BP1.pdb
-	first NONE
-	last NONE
-}
-coordpdb build_files/BP1.pdb BP1
 guesscoord
 regenerate angles dihedrals
 

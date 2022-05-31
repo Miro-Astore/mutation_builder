@@ -5,9 +5,9 @@
 #1371  AP1     ARG G1371R
 
 list_file="../list"
-template_pdb="../final_wt_ionized_added_loops_no_ters_cter_modelled_use_this_gmx_ready.pdb"
-template_psf="../final_wt_ionized_added_loops_no_ters_cter_modelled_use_this_gmx_ready.psf"
-topfile="/home/miro/Downloads/toppar/top_all36_prot.rtf"
+template_pdb="../truncated_system_ready_for_mutation.pdb"
+template_psf="../truncated_system_ready_for_mutation.psf"
+topfile="top_all36_prot.rtf"
 
 rm -r build_files 
 
